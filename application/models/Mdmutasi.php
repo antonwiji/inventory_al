@@ -29,8 +29,6 @@ Class Mdmutasi extends CI_Model{
 			}			
 		}
 
-
-
 		$sql2 = query("SELECT id_master, id_divisi, SUM(jml) AS jml_kirim FROM cc_kirim $imp GROUP BY id_master, id_divisi");
 		foreach($sql2->result_array() as $row){
 			if($iddiv == 0){

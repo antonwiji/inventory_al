@@ -44,6 +44,8 @@ Class Mutasi extends CI_Controller{
 			$vname = "rekam2";
 		}
 
+		$data['id'] = $idmaster;
+
 		$this->load->view("header_box",$data);
 		$this->load->view($vname,$data);
 		$this->load->view("footer");

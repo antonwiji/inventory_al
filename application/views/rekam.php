@@ -54,3 +54,6 @@
 	</tbody>
 </table>
 
+<img src="https://chart.googleapis.com/chart?cht=qr&chs=250x250&chl=Nama%20Barang%20%3A%20<?= $row['nama']?>%0ATanggal%20%3A%20<?php echo indo_date($row['tgl'], "half")?>%0AStock%20%3A%20<?= $mutasi?>pcs" alt="code QR">
+<br>
+<br>

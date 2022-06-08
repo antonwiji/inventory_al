@@ -33,16 +33,12 @@ Class Ajax extends CI_Controller{
 		$data = array();
 		$this->load->model("mdmaster");
 
-		if(isset($_POST['cc_nama']) and isset($_POST['cc_tgl']) and isset($_POST['cc_harga'])){
+		if(isset($_POST['cc_nama']) and isset($_POST['cc_tgl'])){
 			if(empty($_POST['cc_nama'])){
 				$data['error'] = 1;
 				$data['message'] = "Kolom nama belum diisi";
 			}
 			else if(empty($_POST['cc_tgl'])){
-				$data['error'] = 1;
-				$data['message'] = "Kolom tanggal belum diisi";
-			}
-			else if(empty($_POST['cc_harga'])){
 				$data['error'] = 1;
 				$data['message'] = "Kolom tanggal belum diisi";
 			}
@@ -53,13 +49,11 @@ Class Ajax extends CI_Controller{
 
 					$data['nama'] = $_POST['cc_nama'];
 					$data['tgl'] = indo_date($_POST['cc_tgl'],"half");
-					$data['harga'] = $_POST['cc_harga'];
 					$datedb = date("Y-m-d H:i:s",strtotime($_POST['cc_tgl']));
 
 					$arr = array(
 						"id" => null,
 						"nama" => $data['nama'],
-						"harga" => $data['harga'],
 						"tgl" => $datedb,
 						"stat" => 1
 					);

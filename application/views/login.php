@@ -24,7 +24,7 @@
 <body id="login">
 
 	<form action="home/login" class="login-form" method="post">
-		<img src="upload/logo.png" width="350" alt="logo">
+		<h2>PT. EL John Enes Komunikasi</h2>
 		<h3>Aplikasi Inventory</h3>
 		<p>Please sign in to get access</p>
 

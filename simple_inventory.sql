@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2022 at 03:22 PM
+-- Generation Time: Jun 08, 2022 at 03:07 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -39,7 +39,7 @@ CREATE TABLE `cc_divisi` (
 
 INSERT INTO `cc_divisi` (`id`, `nama_divisi`, `stat`) VALUES
 (1, 'Purchasing', 1),
-(2, 'Accounting', 1),
+(2, 'Accounting', 9),
 (3, 'Warehouse', 1),
 (4, 'Human Resource', 1),
 (5, 'General Affair', 1),
@@ -87,7 +87,8 @@ CREATE TABLE `cc_kirim` (
 INSERT INTO `cc_kirim` (`id`, `id_master`, `id_divisi`, `tgl`, `jml`, `ket`, `stat`) VALUES
 (1, 6, 8, '2022-06-05 00:00:00', 100, 'Data sisa periode', 1),
 (2, 2, 13, '2022-06-05 00:00:00', 10, 'Data sisa periode', 1),
-(3, 3, 13, '2022-06-05 00:00:00', 65, 'Data sisa periode', 1);
+(3, 3, 13, '2022-06-05 00:00:00', 65, 'Data sisa periode', 1),
+(4, 9, 3, '2022-06-08 00:00:00', 5, 'Barang Rusak', 1);
 
 -- --------------------------------------------------------
 
@@ -99,7 +100,6 @@ CREATE TABLE `cc_master` (
   `id` int(11) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `tag` varchar(50) DEFAULT NULL,
-  `harga` int(11) NOT NULL,
   `tgl` datetime DEFAULT NULL,
   `stat` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -108,15 +108,17 @@ CREATE TABLE `cc_master` (
 -- Dumping data for table `cc_master`
 --
 
-INSERT INTO `cc_master` (`id`, `nama`, `tag`, `harga`, `tgl`, `stat`) VALUES
-(1, 'Gelas Hadiah', 'wira', 5000, '2017-07-25 00:00:00', 1),
-(2, 'Sarung Hadiah', 'ayu', 2000, '2017-07-26 00:00:00', 1),
-(3, 'Pulpen Faster', 'ayu', 1500, '2017-07-25 00:00:00', 1),
-(4, 'Voucher Pulsa', 'dayu', 10000, '2017-07-27 00:00:00', 1),
-(5, 'Kertas Invoice (dus)', 'wira', 40000, '2017-07-26 00:00:00', 1),
-(6, 'Aqua Botol', 'dayu', 3500, '2017-07-25 00:00:00', 1),
-(7, 'Sosis', NULL, 2500, '2022-06-05 00:00:00', 1),
-(8, 'Susu', NULL, 50000, '2022-06-05 00:00:00', 1);
+INSERT INTO `cc_master` (`id`, `nama`, `tag`, `tgl`, `stat`) VALUES
+(1, 'Gelas Hadiah', 'wira', '2017-07-25 00:00:00', 1),
+(2, 'Sarung Hadiah', 'ayu', '2017-07-26 00:00:00', 1),
+(3, 'Pulpen Faster', 'ayu', '2017-07-25 00:00:00', 1),
+(4, 'Voucher Pulsa', 'dayu', '2017-07-27 00:00:00', 1),
+(5, 'Kertas Invoice (dus)', 'wira', '2017-07-26 00:00:00', 1),
+(6, 'Aqua Botol', 'dayu', '2017-07-25 00:00:00', 1),
+(7, 'Sosis', NULL, '2022-06-05 00:00:00', 1),
+(8, 'Susu', NULL, '2022-06-05 00:00:00', 1),
+(9, 'HeadShet', NULL, '2022-06-08 00:00:00', 1),
+(10, 'Keren lah', NULL, '2022-06-08 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -216,7 +218,10 @@ INSERT INTO `cc_terima` (`id`, `id_master`, `tgl`, `jml`, `ket`, `stat`) VALUES
 (5, 5, '2022-06-05 00:00:00', 50, 'Data awal periode', 1),
 (6, 6, '2022-06-05 00:00:00', 5000, 'Data awal periode', 1),
 (7, 7, '2022-06-05 00:00:00', 0, 'Data awal periode', 1),
-(8, 8, '2022-06-05 00:00:00', 0, 'Data awal periode', 1);
+(8, 8, '2022-06-05 00:00:00', 0, 'Data awal periode', 1),
+(9, 9, '2022-06-08 00:00:00', 0, 'Data awal', 1),
+(10, 9, '2022-06-08 00:00:00', 10, 'HeadShet Xiomi dan Samsung', 1),
+(11, 10, '2022-06-08 00:00:00', 0, 'Data awal', 1);
 
 -- --------------------------------------------------------
 
@@ -307,7 +312,9 @@ INSERT INTO `cms_admin_log` (`id`, `username`, `tgl`, `expired`, `token`, `ip`, 
 (13, 'admin', '2017-07-30 14:59:46', '2017-07-31 02:59:46', 'fb491ba4ed16da2d7c7c968a1e632d92e58b4c16', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'),
 (14, 'admin', '2017-07-30 15:06:03', '2017-07-31 03:06:03', '3d69ddafbfaa8642ff8fd203eaa50db56b126c3f', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'),
 (15, 'admin', '2022-06-05 10:03:34', '2022-06-05 22:03:34', '8af58b762d7d906e86dfe5c7b7f59d52b8f72ed7', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'),
-(16, 'admin', '2022-06-05 10:09:37', '2022-06-05 22:09:37', 'e162d198d2e89e713f9e1e4272964a2e65d609cf', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36');
+(16, 'admin', '2022-06-05 10:09:37', '2022-06-05 22:09:37', 'e162d198d2e89e713f9e1e4272964a2e65d609cf', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'),
+(17, 'admin', '2022-06-08 14:42:17', '2022-06-09 02:42:17', '6bb37aa6ae0964a2a0d833f7f219b9392c2b644e', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'),
+(18, 'admin', '2022-06-08 14:55:02', '2022-06-09 02:55:02', '9985b3e6d4c9b1159fb741310d89cd0cb2f8fa22', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36');
 
 -- --------------------------------------------------------
 
@@ -436,13 +443,13 @@ ALTER TABLE `cc_harga`
 -- AUTO_INCREMENT for table `cc_kirim`
 --
 ALTER TABLE `cc_kirim`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cc_master`
 --
 ALTER TABLE `cc_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `cc_project`
@@ -460,7 +467,7 @@ ALTER TABLE `cc_temp`
 -- AUTO_INCREMENT for table `cc_terima`
 --
 ALTER TABLE `cc_terima`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `cc_terjual`
@@ -478,7 +485,7 @@ ALTER TABLE `cms_admin_fail`
 -- AUTO_INCREMENT for table `cms_admin_log`
 --
 ALTER TABLE `cms_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `cms_option`

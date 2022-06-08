@@ -5,7 +5,6 @@
 			<th width=38%>Nama Barang</th>
 			<!--<th width=30%>Tag</th>-->
 			<th width=20%>Diinput Tanggal</th>
-			<th width=100>Harga</th>
 		</tr>
 		<tr>
 			<td colspan="4">
@@ -18,7 +17,6 @@
 			<td><input type="text" class="form-control" name="cc_nama" placeholder="Nama CC"></td>
 			<!--<td><input type="text" class="form-control" name="cc_tag" placeholder="Tag"></td>-->
 			<td><input type="date" name="cc_tgl" value="<?=$date?>" class="form-control"></td>
-			<td><input type="text" name="cc_harga" class="form-control" placeholder="Harga"></td>
 			<td>
 				<button class="btn btn-success" title="Save"><span class="fa fa-check"></span></button>
 				<button class="btn btn-danger close-button" data-target="cc_master" title="Cancel"><span class="fa fa-times"></span></button>
@@ -32,7 +30,6 @@
 		<tr>
 			<td><?=$row['nama']?></td>
 			<td><?=indo_date($row['tgl'],"half")?></td>
-			<td>Rp. <?= $row['harga'] ?></td>
 			<td>
 				<span class="btn btn-info edit-button btn-sm" data-fancybox data-src="master/edit/master/<?=$row['id']?>">Edit</span>
 				<span href="master/delete/<?=$row['id']?>" class="btn btn-danger btn-sm delete-button"><span class="fa fa-trash"></span></span>
@@ -65,7 +62,6 @@ function cc_master(){
         data : {
             cc_nama : $("[name=cc_nama]").val(),
             cc_tgl : $("[name=cc_tgl]").val(),
-			cc_harga: $("[name=cc_harga]").val()
         }
     }).done(function (data){
         if(data['error'] > 0){
@@ -77,9 +73,8 @@ function cc_master(){
             //reset field
             $("[name=cc_nama]").val("").focus();
             $("[name=cc_tgl]").val($("[data-tgl]").attr("data-tgl"));
-			$("[name=cc_harga]").val("");
             //append to new row
-            $("table.data tbody").prepend('<tr class="newrow"><td>'+data['nama']+'</td><td>'+data['harga']+'</td><td>'+data['tgl']+'</td><td><span class="btn btn-info edit-button btn-sm" data-fancybox data-src="master/edit/master/'+data['id']+'">Edit</span> <span href="master/delete/'+data['id']+'" class="btn btn-danger btn-sm delete-button"><span class="fa fa-trash"></span></span></td></tr>');
+            $("table.data tbody").prepend('<tr class="newrow"><td>'+data['nama']+'</td><td>'+data['tgl']+'</td><td><span class="btn btn-info edit-button btn-sm" data-fancybox data-src="master/edit/master/'+data['id']+'">Edit</span> <span href="master/delete/'+data['id']+'" class="btn btn-danger btn-sm delete-button"><span class="fa fa-trash"></span></span></td></tr>');
 
             //focus to first field
         }

@@ -75,7 +75,7 @@ if(!isset($submenu))
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="<?=is_same(2,$menu,"active")?>">
-                        <a href="javascript:;" data-toggle="collapse" data-target="#master"><i class="fa fa-fw fa-file-text-o"></i> Data PT.LEJUFA <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#master"><i class="fa fa-fw fa-file-text-o"></i> PT El John Enes Komunikasi <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="master"  class="<?=is_not_same(2,$menu,"collapse")?>">
                             <li class="<?=is_same(21,$submenu,"active")?>">
                                 <a href="master/cc">Inventory</a>
