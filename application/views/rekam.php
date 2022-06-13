@@ -1,59 +1,60 @@
-<table align="left">
-	<tr>
-		<td>Nama Inventory</td>
-		<td style="padding:0 1em;">:</td>
-		<td><strong><?=$row['nama']?></strong></td>
-	</tr>
-</table>
-<div class="clearfix"></div>
-
-
-<table class="data table">
-	<thead>
+<div class="detail">
+	<table align="left">
 		<tr>
-			<th>Tanggal</th>
-			<th>Masuk <span class="label label-success"><span class="fa fa-plus"></span></span></th>
-			<th>Keluar <span class="label label-danger"><span class="fa fa-minus"></span></span></th>
-			<th>Keterangan</th>
-			<th>Mutasi</th>
+			<td>Nama Inventory</td>
+			<td style="padding:0 1em;">:</td>
+			<td><strong><?=$row['nama']?></strong></td>
 		</tr>
-	</thead>
-	<tbody>
-	<?php
-	$mutasi = 0;
-	foreach($item_mutasi as $tgl=>$data){
-		$tgll = date("Y-m-d H:i:s",$tgl);
-		$terima = "";
-		if(isset($data['terima'])){
-			$terima = $data['terima'];
-			$mutasi += $terima;
+	</table>
+	<div class="clearfix"></div>
+
+
+	<table class="data table">
+		<thead>
+			<tr>
+				<th>Tanggal</th>
+				<th>Masuk <span class="label label-success"><span class="fa fa-plus"></span></span></th>
+				<th>Keluar <span class="label label-danger"><span class="fa fa-minus"></span></span></th>
+				<th>Keterangan</th>
+				<th>Mutasi</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php
+		$mutasi = 0;
+		foreach($item_mutasi as $tgl=>$data){
+			$tgll = date("Y-m-d H:i:s",$tgl);
+			$terima = "";
+			if(isset($data['terima'])){
+				$terima = $data['terima'];
+				$mutasi += $terima;
+			}
+			$kirim = "";
+			if(isset($data['kirim'])){
+				$kirim = $data['kirim'];
+				$mutasi -= $kirim;
+			}
+			$ket = isset($data['ket']) ? $data['ket'] : "";
+
+
+			echo "
+			<tr>
+				<td>".indo_date($tgll,"half")."</td>
+				<td>$terima</td>
+				<td>$kirim</td>
+				<td><em>$ket</em></td>
+				<td>$mutasi</td>
+			</tr>
+			";
 		}
-		$kirim = "";
-		if(isset($data['kirim'])){
-			$kirim = $data['kirim'];
-			$mutasi -= $kirim;
-		}
-		$ket = isset($data['ket']) ? $data['ket'] : "";
-
-
-		echo "
-		<tr>
-			<td>".indo_date($tgll,"half")."</td>
-			<td>$terima</td>
-			<td>$kirim</td>
-			<td><em>$ket</em></td>
-			<td>$mutasi</td>
-		</tr>
-		";
-	}
-	?>
-		<tr>
-			<td colspan=4 align="right"><strong>Stok Master Saat Ini</strong></td>
-			<td><strong><?=$mutasi?> pcs</strong></td>
-		</tr>
-	</tbody>
-</table>
-
-<img src="https://chart.googleapis.com/chart?cht=qr&chs=250x250&chl=Nama%20Barang%20%3A%20<?= $row['nama']?>%0ATanggal%20%3A%20<?php echo indo_date($row['tgl'], "half")?>%0AStock%20%3A%20<?= $mutasi?>pcs" alt="code QR">
-<br>
-<br>
+		?>
+			<tr>
+				<td colspan=4 align="right"><strong>Stok Master Saat Ini</strong></td>
+				<td><strong><?=$mutasi?> pcs</strong></td>
+			</tr>
+		</tbody>
+	</table>
+	<img src="https://chart.googleapis.com/chart?cht=qr&chs=100x100&chl=Nama%20Barang%20%3A%20<?= $row['nama']?>%0ATanggal%20%3A%20<?php echo indo_date($row['tgl'], "half")?>%0AStock%20%3A%20<?= $mutasi?>pcs" alt="code QR">
+	<br>
+	<br>
+</div>

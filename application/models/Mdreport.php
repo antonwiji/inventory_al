@@ -19,10 +19,10 @@ Class Mdreport extends CI_Model{
 
 	public function list_cc(){
 		$sql = query("SELECT * FROM cc_master WHERE stat <> 9");
-		$arr = [-1];
+		$arr = [""];
 		foreach($sql->result_array() as $row){
 			// $arr[$row['id']]array_push();
-			array_push($arr, [$row['nama'], $row['harga']]);
+			array_push($arr, $row['nama']);
 			
 		}
 		return $arr;

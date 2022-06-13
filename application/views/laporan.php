@@ -95,10 +95,10 @@ if($show == 1) :
 			foreach($query as $idmaster=>$isi){
 				if(isset($list_cc[$idmaster])){
 
-					$nama   = $list_cc[$idmaster][0];
-					$harga = $list_cc[$idmaster][1];
+					$nama   = $list_cc[$idmaster];
 					$mutasi = 0;
 					$masuk = $keluar = 0;
+					
 					foreach($isi as $tgl => $row){
 						$date = date("Y-m-d",$tgl);
 
@@ -108,6 +108,7 @@ if($show == 1) :
 							$mutasi += $terima;
 						}
 						$kirim = 0;
+						
 						if(isset($row['kirim'])){
 							$kirim = $row['kirim'];
 							$mutasi -= $kirim;
@@ -179,8 +180,8 @@ elseif($show == 2):
 				<th>Tempat</th>
 				<th>Tanggal</th>
 				<th>Nama Barang</th>
-				<th>Terjual</th>
-				<th>Harga Barang</th>
+				<th>Barang Keluar</th>
+				
 				
 			</tr>
 		</thead>
@@ -192,14 +193,15 @@ elseif($show == 2):
 				if(isset($listdiv[$idTempat])){
 
 					$Tempat = $listdiv[$idTempat];
-
 					foreach($isi as $idmaster => $isis){
-						$ccname = isset($list_cc[$idmaster][0]) ? $list_cc[$idmaster][0] : null;
-						$ccharga = isset($list_cc[$idmaster][1]) ? $list_cc[$idmaster][1] : null;
+						$totalout = [];
+						$ccname = isset($list_cc[$idmaster]) ? $list_cc[$idmaster] : null;
 						$mutasi = 0;
 						$masuk = $keluar = 0;
+
 						
 						foreach($isis as $tgl => $row){
+							array_push($totalout, $row['kirim']);
 							$date = date("Y-m-d",$tgl);
 
 							$kirim = "";
@@ -224,7 +226,7 @@ elseif($show == 2):
 									<td>".indo_date($date,"half")."</td>
 									<td>$ccname</td>
 									<td>$kirim</td>
-									<td>$ccharga</td>
+									
 									
 									
 								</tr>
@@ -238,13 +240,11 @@ elseif($show == 2):
 						}
 
 						if($detail == 1){
-							$intccharga = (int)$ccharga;
-							$intkirim = (int)$kirim;
-							$total = $intccharga * $intkirim;
+							$finalout = array_sum($totalout);
 							echo "
 							<tr class='active'>
-								<td colspan=5 align='right'>Total</td>
-								<td><strong>Rp. $total</strong></td>
+								<td colspan=4 align='right'>Total Barang Keluar : </td>
+								<td><strong>$finalout pcs</strong></td>
 								<td></td>
 							</tr>
 							<tr>
@@ -260,8 +260,6 @@ elseif($show == 2):
 								<td>".indo_date($date,"half")."</td>
 								<td>$ccname</td>
 								<td>$masuk</td>
-								<td>$ccharga</td>
-								
 							</tr>
 							";
 							$n++;
